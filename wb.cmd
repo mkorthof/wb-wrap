@@ -24,8 +24,8 @@ GOTO :EOF
 <# -------------------------------------------------------------------------- #>
 
 <# Either set $backupDrive to a static drive letter (e.g. "D") or a UUID:     #>
-<# "\\?\Volume{c00d6b5a-f734-48e6-b321-029977e5169f". List UUIDS: 'mountvol'. #>
-$backupDrive = "\\?\Volume{c00d6b5a-f734-48e6-b321-029977e5169f}\"
+<# "\\?\Volume{c1affc50-7554-11e9-8f9e-2a86e4085a59". List UUIDS: 'mountvol'. #>
+$backupDrive = "\\?\Volume{c1affc50-7554-11e9-8f9e-2a86e4085a59}\"
 
 <# Set Volume Label of Backup Drive #>
 $backupLabel = "My Backups"
