@@ -42,10 +42,12 @@ $maxRemove = 3
 <# be removed. You could look at your current backup to calculate these.      #>
 <# ----------------------------------------------------------END-OF-CONFIG--- #>
 
+$_Args = $Args
+
 $log = 1; $admin = 1; $debug = 0; $force = 0; $hibernate = 0; $test = 0
 $removeDrive = 0
 
-If ($Args -iMatch "[-/](\?|h$|help)") {
+If ($_Args -iMatch "[-/](\?|h$|help)") {
 	Write-Host -ForegroundColor White "`r`nWindows Backup Wrapper`r`n"
 	Write-Host "  Normally you should not need any of these, just configure options in wb.cmd"
 	Write-Host "  and run it without arguments`r`n"
@@ -58,17 +60,17 @@ If ($Args -iMatch "[-/](\?|h$|help)") {
 	Write-Host "     EXAMPLE  : wb.cmd -d -a1 -b0  (use debug, admin prompt on, bitlocker off)"
 	Exit 0
 }
-If ($Args -iMatch "[-/]d")   { $debug = 1 }
-If ($Args -iMatch "[-/]f")   { $force = 1 }
-If ($Args -iMatch "[-/]a0")  { $admin = 0 }       ElseIf ($Args -iMatch "[-/]a1") { $admin = 1 }
-If ($Args -iMatch "[-/]b0")  { $blDrive = 0 }     ElseIf ($Args -iMatch "[-/]b1") { $blDrive = 1 }
-If ($Args -iMatch "[-/]h0")  { $hibernate = 0 }   ElseIf ($Args -iMatch "[-/]h1") { $hibernate = 1 }
-If ($Args -iMatch "[-/]r0")  { $removeDrive = 0 } ElseIf ($Args -iMatch "[-/]r1") { $removeDrive = 1 }
-If ($Args -iMatch "[-/]l0")  { $log = 0 }         ElseIf ($Args -iMatch "[-/]l1") { $log = 1 }
-If ($Args -iMatch "[-/]t0")  { $test = 0 }        ElseIf ($Args -iMatch "[-/]t1") { $test = 1 }
+If ($_Args -iMatch "[-/]d")   { $debug = 1 }
+If ($_Args -iMatch "[-/]f")   { $force = 1 }
+If ($_Args -iMatch "[-/]a0")  { $admin = 0 }       ElseIf ($_Args -iMatch "[-/]a1") { $admin = 1 }
+If ($_Args -iMatch "[-/]b0")  { $blDrive = 0 }     ElseIf ($_Args -iMatch "[-/]b1") { $blDrive = 1 }
+If ($_Args -iMatch "[-/]h0")  { $hibernate = 0 }   ElseIf ($_Args -iMatch "[-/]h1") { $hibernate = 1 }
+If ($_Args -iMatch "[-/]r0")  { $removeDrive = 0 } ElseIf ($_Args -iMatch "[-/]r1") { $removeDrive = 1 }
+If ($_Args -iMatch "[-/]l0")  { $log = 0 }         ElseIf ($_Args -iMatch "[-/]l1") { $log = 1 }
+If ($_Args -iMatch "[-/]t0")  { $test = 0 }        ElseIf ($_Args -iMatch "[-/]t1") { $test = 1 }
 
-$scriptDir = $Args[0]
-$rm = ($Args[0]); $Args = ($Args) | Where { $_ -ne $rm }
+$scriptDir = $_Args[0]
+$rm = ($_Args[0]); $_Args = ($_Args) | Where { $_ -ne $rm }
 $logFile = $scriptDir + "\wb.log"
 If ($log -eq 1) {
 	If ( $(Try { (Test-Path variable:local:logFile) -And (-Not [string]::IsNullOrWhiteSpace($logFile)) } Catch { $False }) ) {
